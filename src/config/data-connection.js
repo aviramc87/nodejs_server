@@ -1,10 +1,10 @@
 module.exports = {
     database: {
         authentication: {
-            type: "azure-active-directory-password",
+            type: "default",
             options: {
-                userName: "aviramadmin@aviramc9876gmail.onmicrosoft.com",
-                password: "Avi15787@",
+                userName: "aviramlogin",
+                password: "Avi15787!",
             }
         },
         server: "aviramserver1.database.windows.net", // update me

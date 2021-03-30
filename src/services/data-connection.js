@@ -1,10 +1,11 @@
 
 const Connection = require('tedious').Connection;
-const config = require('../config/data-connection').database;
-
+const dbconfig = require('../config/data-connection').database;
+const {Sequelize} = require('sequelize');
+/*
 const connection = new Connection(config);
 
-function dataConnection(){
+const dataConnection = () => {
     console.log('data service loaded')
 
     // Setup event handler when the connection is established.
@@ -12,11 +13,28 @@ function dataConnection(){
         if(err) {
             console.log('Error: ', err)
         }
-        // If no error, then good to go...
-        executeStatement();
+        // If no error, then good to go..
     });
 
 // Initialize the connection.
     connection.connect();
 }
-module.exports = dataConnection;
+*/
+
+const sequelize = new Sequelize(dbconfig.options.database,dbconfig.authentication.options.userName,dbconfig.authentication.options.password,{
+    host: dbconfig.server,
+    dialect: 'mssql',
+    pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+    },
+    dialectOptions: {
+        encrypt: true
+    }
+});
+
+
+
+
+module.exports = sequelize;
